@@ -3,8 +3,14 @@ import { itemsRouter } from './Router/ItemsRouter';
 import bodyParser from 'body-parser';
 import { DataSource } from 'typeorm';
 import { Food } from './Entity/food';
+import * as dotenv from 'dotenv';
 
-const PORT = 3000;
+dotenv.config();
+
+const port = process.env.PORT;
+const pw = process.env.PASSWORD;
+const user = process.env.USER;
+const pgdb = process.env.PGDATABASE;
 
 const app: Express = express();
 
@@ -15,9 +21,9 @@ export const AppDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,
-    username: "postgres",
-    password: "muna",
-    database: "munadb",
+    username: user,
+    password: pw,
+    database: pgdb,
     synchronize: true,
     logging: true,
     entities: [Food],
@@ -31,6 +37,6 @@ AppDataSource.initialize()
     })
     .catch((error) => console.log(error))
 
-app.listen(PORT, () => {
-    console.log('Listening on port: ', PORT);
+app.listen(port, () => {
+    console.log(`Listening on port ${port} `);
 });
