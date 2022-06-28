@@ -30,14 +30,10 @@ itemsRouter.get('/:id', async (req: Request, res: Response) => {
 //POST http method
 itemsRouter.post('/', async(req:Request, res:Response) => {
     //for new data
-    const newDataItems: NewItems = {
-        // id: Number(req.body.id),
-        name: req.body.name,
-        category: req.body.category
-    }
+
     // console.log(newDataItems);
     try{
-        const result = await addItem(newDataItems)
+        const result = await addItem(req.body)
         res.status(200).json(result)
     }catch(error){
         res.json('Error')

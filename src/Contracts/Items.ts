@@ -1,5 +1,5 @@
 export interface Items{
     id: number;
-    name: string;
+    foodname: string;
     category: string;
 }

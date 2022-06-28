@@ -24,7 +24,7 @@ export const findById = async (fid: number) => {
 }
 
 //for post method
-export const addItem = (newData: NewItems) => {
+export const addItem = (newData: Food) => {
     AppDataSource.manager.insert(Food, newData);
     return Promise.resolve(findAll());
 }
@@ -36,7 +36,7 @@ export const updatedItem = async (fid: number, item: Items) => {
         id: fid,
     })
     if (foodToUpdate) {
-        foodToUpdate.name = item.name;
+        foodToUpdate.foodname = item.foodname;
         foodToUpdate.category = item.category;
         await foodRepository.save(foodToUpdate);
         return Promise.resolve(findAll());

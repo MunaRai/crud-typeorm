@@ -1,9 +1,11 @@
 import express, { Express } from 'express';
 import { itemsRouter } from './Router/ItemsRouter';
 import bodyParser from 'body-parser';
-import { DataSource } from 'typeorm';
+import {  DataSource } from 'typeorm';
 import { Food } from './Entity/food';
+import { User } from './Entity/user';
 import * as dotenv from 'dotenv';
+import { userRouter } from './Router/UserRouter';
 
 dotenv.config();
 
@@ -16,6 +18,7 @@ const app: Express = express();
 
 app.use(bodyParser.json());
 app.use('/items', itemsRouter);
+app.use('/users', userRouter);
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -26,17 +29,18 @@ export const AppDataSource = new DataSource({
     database: pgdb,
     synchronize: true,
     logging: true,
-    entities: [Food],
+    entities: [Food, User],
     subscribers: [],
     migrations: [],
 })
 
 AppDataSource.initialize()
     .then(() => {
-       console.log('db connected successfully')
+        console.log('db connected successfully')
     })
     .catch((error) => console.log(error))
 
+//to listen
 app.listen(port, () => {
     console.log(`Listening on port ${port} `);
 });

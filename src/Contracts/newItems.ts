@@ -1,4 +1,4 @@
 export interface NewItems{
-    name: string;
+    foodname: string;
     category: string;
 }
