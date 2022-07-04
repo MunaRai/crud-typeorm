@@ -18,7 +18,7 @@ const app: Express = express();
 
 app.use(bodyParser.json());
 app.use('/items', itemsRouter);
-app.use('/users', userRouter);
+app.use('/', userRouter);
 
 export const AppDataSource = new DataSource({
     type: "postgres",
