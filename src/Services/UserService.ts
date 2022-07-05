@@ -8,8 +8,8 @@ export const findUser = () => {
 }
 
 //post
-export const addUser = (newUser: User) => {
-    AppDataSource.manager.insert(User, newUser);
+export const addUser = async (newUser: User) => {
+    await AppDataSource.manager.insert(User, newUser);
     return Promise.resolve(findUser());
 }
 

@@ -6,6 +6,8 @@ import { Food } from './Entity/food';
 import { User } from './Entity/user';
 import * as dotenv from 'dotenv';
 import { userRouter } from './Router/UserRouter';
+import { Payment } from './Entity/payment.';
+import { paymentRouter } from './Router/PaymentRouter';
 
 dotenv.config();
 
@@ -19,6 +21,7 @@ const app: Express = express();
 app.use(bodyParser.json());
 app.use('/items', itemsRouter);
 app.use('/', userRouter);
+app.use('/', paymentRouter)
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -28,8 +31,8 @@ export const AppDataSource = new DataSource({
     password: pw,
     database: pgdb,
     synchronize: true,
-    logging: true,
-    entities: [Food, User],
+    logging: false,
+    entities: [Food, User, Payment],
     subscribers: [],
     migrations: [],
 })

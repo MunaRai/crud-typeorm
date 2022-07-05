@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToMany, JoinTable } from "typeorm"
+import { Payment } from "./payment."
 import { User } from "./user"
 
 @Entity()
@@ -15,12 +16,12 @@ export class Food {
     category: string
 
     @OneToOne(() => User, user => user.food, {onDelete: 'CASCADE'})
-    user: User;
+    user: User
 
-    // @OneToMany(() => User, user => user.food)
-    // users: User[];
+    @OneToMany(() => Payment, (payment) => payment.food)
+    payments: Payment[]
 
-    @ManyToMany(() => User, (user) => user.food)
-    @JoinTable()
-    mtmuser: User[];
+    // @ManyToMany(() => User, (user) => user.food)
+    // @JoinTable()
+    // mtmuser: User[];
 }
